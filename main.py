@@ -1,7 +1,6 @@
 from fastapi import FastAPI, Request, HTTPException
 from fastapi.responses import StreamingResponse
 from pyrogram import Client, enums
-from pyrogram.types import LinkPreviewOptions
 from motor.motor_asyncio import AsyncIOMotorClient
 from bson.objectid import ObjectId
 from contextlib import asynccontextmanager
@@ -42,7 +41,6 @@ async def lifespan(app: FastAPI):
         parse_mode=enums.ParseMode.HTML,
         max_concurrent_transmissions=10,
         sleep_threshold=0,
-        link_preview_options=LinkPreviewOptions(is_disabled=True),
         in_memory=True
     )
     await bot.start()
@@ -60,7 +58,6 @@ async def lifespan(app: FastAPI):
                     parse_mode=enums.ParseMode.HTML,
                     max_concurrent_transmissions=10,
                     sleep_threshold=0,
-                    link_preview_options=LinkPreviewOptions(is_disabled=True),
                     in_memory=True
                 )
                 await worker.start()
